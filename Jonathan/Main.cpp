@@ -7,7 +7,7 @@ using namespace sf;
 Texture texture;
 Sprite sprite;
 void Load() {
-	if (!texture.loadFromFile("res/img/spaceship1.png")) {
+	if (!texture.loadFromFile("res/img/ship.png")) {
 		throw std::invalid_argument("Loading error!");
 	}
 }
@@ -52,7 +52,7 @@ int main() {
 			window.close();
 		}
 
-		window.clear();
+		window.clear(Color::Color(121, 109, 224, 255));
 		Update();
 		Render(window);
 		window.display();
