@@ -2,8 +2,9 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "GameObject.h"
 #include "SplashScreen.h"
+#include "MainMenu.h"
+#include "GameObject.h"
 #include "Game.h"
 
 using namespace sf;
@@ -16,15 +17,38 @@ enum State
 	Pause
 };
 
-Vector2i resolution = Vector2i(1920, 1080);
+Vector2i defaultRes = Vector2i(1920, 1080); //MaybeDefine
+Vector2i resolution;
 
-SplashScreen splashScreen;
 State state = Splash;
+SplashScreen splashScreen;
+MainMenu mainMenu;
 class Game game;
+
 
 void Load()
 {
+	mainMenu.Load(resolution.x, resolution.y);
+}
 
+void MenuHandler(sf::RenderWindow& window)
+{
+	mainMenu.Render(window);
+	switch(mainMenu.GetMenuResponse(window))
+	{
+	case MainMenu::Start:
+		state = Game;
+		game.Load();
+		break;
+	case MainMenu::Options:
+
+		break;
+	case MainMenu::Exit:
+		window.close();
+		break;
+	default:
+		break;
+	};
 }
 
 void Update()
@@ -39,6 +63,7 @@ void Render(RenderWindow &window)
 
 int main()
 {
+	resolution = defaultRes;
 	RenderWindow window(VideoMode(resolution.x, resolution.y), "ArseBiscuits");//Look into fullscreening
 	try
 	{
@@ -65,22 +90,24 @@ int main()
 			window.close();
 		}
 
+		window.clear(Color::Color(48, 40, 100, 255));
+
 		switch (state)
 		{
 		case Splash:
 			splashScreen.Show(window, resolution.x, resolution.y);
-			state = Game;
+			state = Menu;
 			break;
 		case Menu:
+			MenuHandler(window);
 			break;
 		case Game:
-			game.Sequence(window);//Determine if we want to do this or use a case statement in update and render
+			game.Update();//Determine if we want to do this or use a case statement in update and render
+			game.Render(window);
 			break;
 		case Pause: //This one may not be needed
 			break;
 		}
-
-		window.clear(Color::Color(48, 40, 100, 255));
 		Update();
 		Render(window);
 		window.display();

@@ -10,7 +10,6 @@ public:
 	void Load();
 	void Update();
 	void Render(sf::RenderWindow &window);
-	void Sequence(sf::RenderWindow &window);
 private:
 
 };

@@ -1,6 +1,7 @@
-﻿  Main.cpp
-e:\programming\github\jonathan\jonathan\main.cpp(71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Game.cpp
-  Generating Code...
-  Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
-  Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)
+﻿  MainMenu.cpp
+c:\users\40165151\documents\github\jonathan\jonathan\mainmenu.cpp(26): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\mainmenu.cpp(37): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\mainmenu.cpp(48): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\mainmenu.cpp(92): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
+  Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)
