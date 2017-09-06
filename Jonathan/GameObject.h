@@ -5,11 +5,12 @@ class GameObject
 {
 	
 public:
-	sf::Sprite sprite;
 	sf::Texture texture;
+	sf::Sprite sprite;
 
 	GameObject();
 	~GameObject();
+
 	void SetTexture(std::string location, float xScale);
 	void ChangeResolution(float res);
 	void SetPosition(sf::Vector2f position);
