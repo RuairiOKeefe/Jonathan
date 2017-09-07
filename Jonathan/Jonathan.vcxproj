@@ -150,17 +150,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="SplashScreen.cpp" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\MainMenu.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Ship.h" />
+    <ClInclude Include="src\SplashScreen.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="SplashScreen.h" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MainMenu.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Ship.cpp" />
+    <ClCompile Include="src\SplashScreen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\img\ExitButton.png" />
+    <Image Include="res\img\MenuScreen.png" />
+    <Image Include="res\img\OptionsButton.png" />
+    <Image Include="res\img\ship.png" />
+    <Image Include="res\img\StartButton.png" />
+    <Image Include="res\img\TempSplash.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

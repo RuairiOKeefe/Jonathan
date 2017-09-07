@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Jonathan"
+    "\\Jonathan",
+    "\\Jonathan\\src"
   ],
-  "SelectedNode": "\\Jonathan",
+  "SelectedNode": "\\Jonathan\\Jonathan.vcxproj.filters",
   "PreviewInSolutionExplorer": false
 }
