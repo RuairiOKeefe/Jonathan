@@ -1,6 +1,6 @@
 #include "Player.h"
 
-void Player::Update(float dt, std::vector<GameObject>& projectileList)
+void Player::Update(float dt, std::vector<Projectile>& projectileList)
 {
 	//This should be a virtual method, currently contains the player update while that is the only gameObject
 	sf::Vector2f move;
@@ -23,8 +23,9 @@ void Player::Update(float dt, std::vector<GameObject>& projectileList)
 	}
 	Move(move*300.0f*dt);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && fireCD.getElapsedTime().asSeconds() >= fireRate)
 	{
-		Shoot(projectileList, shot, this->sprite.getPosition() + shotOrigin);
+		Shoot(projectileList, shot, sprite.getPosition() + shotOrigin);
+		fireCD.restart();
 	}
 }

@@ -31,7 +31,7 @@ void Load()
 	mainMenu.Load(resolution.x, resolution.y);
 }
 
-void MenuHandler(sf::RenderWindow& window)
+void MenuHandler(RenderWindow& window)
 {
 	mainMenu.Render(window);
 	switch(mainMenu.GetMenuResponse(window))

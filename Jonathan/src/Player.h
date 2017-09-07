@@ -5,7 +5,8 @@
 class Player : public Ship
 {
 public:
+	float fireRate;
+	sf::Clock fireCD;
 
-
-	void Update(float dt, std::vector<GameObject>& projectileList);
+	void Update(float dt, std::vector<Projectile>& projectileList);
 };

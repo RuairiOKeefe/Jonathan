@@ -5,8 +5,13 @@
 class Projectile : public GameObject
 {
 public:
+	Projectile();
+	~Projectile();
+
 	float speed;
 
-	void Move();
-	void Update();
+	void MoveShot(float dt);
+	//void CheckHit();
+	float DealDamage();
+	void Update(float dt);
 };

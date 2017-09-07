@@ -7,7 +7,7 @@ class Game
 {
 public:
 	Player player;//Use a collection later ofc
-	std::vector<GameObject> projectileList;
+	std::vector<Projectile> projectileList;
 
 	void Load();
 	void Update();

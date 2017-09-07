@@ -15,7 +15,7 @@ public:
 	void ChangeScale(float scale);
 	void SetPosition(sf::Vector2f position);
 	void Move(sf::Vector2f move);
-	virtual void Update(float dt, std::vector<GameObject>& projectileList) { throw std::invalid_argument("Error: Inherited method has no Update method"); };
+	virtual void Update(float dt) { throw std::invalid_argument("Error: Inherited method has no Update method"); };
 
 private:
 
