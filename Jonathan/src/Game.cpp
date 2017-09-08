@@ -3,49 +3,83 @@
 void Game::Load()
 {
 	float xScale = 2;
-	player.SetTexture("res/img/ship.png");
-	player.shot.SetTexture("res/img/BasicShot.png");
-	player.fireRate = 0.2f;
 
-	EnemyShip* strafer = new EnemyShip();
-	strafer->SetTexture("res/img/Strafer.png");
-	strafer->sprite.setPosition(sf::Vector2f(300, 500));
-	hostileVec.push_back(*strafer);
+	for (int i = 0; i < 10; i++)
+	{
+		Strafer* strafer = new Strafer(sf::Vector2f(10.0f - (i * 32), 300), sf::Vector2f(1, 0));
+		hostileVec.push_back(strafer);
+	}
 }
 
 void Game::Update()
 {
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
-	player.sprite.rotate(dt*100.0f);
-	player.Update(dt, projectileVec);
-	std::vector<EnemyShip>::iterator ships = hostileVec.begin();
-	while (ships != hostileVec.end())
-	{
-		//ships->Update(dt);
-		ships++;
-	}
+	//player.sprite.rotate(dt*100.0f);
 	std::vector<Projectile>::iterator shot = projectileVec.begin();
 	while (shot != projectileVec.end())
 	{
 		shot->Update(dt);
+		std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
+		while (ships != hostileVec.end())
+		{
+			if(shot->playerShot)
+				(*ships)->TakeDamage(shot->CheckHit((*ships)->sprite));
+			else
+				player.TakeDamage(shot->CheckHit(player.sprite));
+			ships++;
+		}
+
 		shot++;
 	}
+
+	for (std::vector<Projectile*>::size_type n = 0; n < projectileVec.size();)
+	{
+		if (projectileVec[n].despawn)
+		{
+			projectileVec[n].~Projectile();
+			projectileVec.erase(projectileVec.begin() + n);
+		}
+		else
+			n++;
+	}
+	projectileVec.shrink_to_fit();
+
+	std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
+	while (ships != hostileVec.end())
+	{
+		(*ships)->Update(dt, projectileVec, player.sprite.getPosition());
+		ships++;
+	}
+
+	for (std::vector<EnemyShip*>::size_type n = 0; n < hostileVec.size();)
+	{
+		if (hostileVec[n]->despawn)
+		{
+			hostileVec[n]->~EnemyShip();
+			hostileVec.erase(hostileVec.begin() + n);
+		}
+		else
+			n++;
+	}
+	hostileVec.shrink_to_fit();
+
+	player.Update(dt, projectileVec);
 }
 
 void Game::Render(sf::RenderWindow &window)
 {
-	window.draw(player.sprite);
 	std::vector<Projectile>::iterator shot = projectileVec.begin();
-	std::vector<EnemyShip>::iterator ships = hostileVec.begin();
-	while (ships != hostileVec.end())
-	{
-		window.draw(ships->sprite);
-		ships++;
-	}
 	while (shot != projectileVec.end())
 	{
 		window.draw(shot->sprite);
 		shot++;
+	}
+	window.draw(player.sprite);
+	std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
+	while (ships != hostileVec.end())
+	{
+		window.draw((*ships)->sprite);
+		ships++;
 	}
 }

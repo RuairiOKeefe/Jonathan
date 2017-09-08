@@ -8,8 +8,8 @@
 class Game
 {
 public:
-	Player player;//Use a collection later ofc
-	std::vector<EnemyShip> hostileVec;
+	Player player;
+	std::vector<EnemyShip*> hostileVec;
 	std::vector<Projectile> projectileVec;
 
 	void Load();

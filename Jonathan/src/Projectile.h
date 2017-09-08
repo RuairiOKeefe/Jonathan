@@ -8,13 +8,17 @@ class Projectile : public GameObject
 {
 public:
 	Projectile();
+	Projectile(std::string location, float speed, float damage);
+	Projectile(std::string location, float speed, float damage, bool playerShot);
 	~Projectile();
 
 	float speed;
+	float damage;
 	float angle;
+	bool playerShot = false;
+	bool despawn = false;
 
 	void MoveShot(float dt);
-	//void CheckHit();
-	float DealDamage();
+	float CheckHit(sf::Sprite other);
 	void Update(float dt);
 };
