@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\EnemyShip.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\MainMenu.h" />
@@ -157,8 +158,10 @@
     <ClInclude Include="src\Projectile.h" />
     <ClInclude Include="src\Ship.h" />
     <ClInclude Include="src\SplashScreen.h" />
+    <ClInclude Include="src\Strafer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnemyShip.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -167,6 +170,7 @@
     <ClCompile Include="src\Projectile.cpp" />
     <ClCompile Include="src\Ship.cpp" />
     <ClCompile Include="src\SplashScreen.cpp" />
+    <ClCompile Include="src\Strafer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ExitButton.png" />

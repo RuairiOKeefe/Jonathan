@@ -19,6 +19,7 @@ void GameObject::SetTexture(std::string location)
 	{
 		sprite.setTexture(texture);
 	}
+	sprite.setOrigin(sf::Vector2f(texture.getSize().x / 2.0f, texture.getSize().y / 2.0f));
 }
 
 void GameObject::ChangeScale(float scale)//Decide what the fuck we're doing with this at some point

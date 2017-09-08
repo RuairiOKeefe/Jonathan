@@ -25,7 +25,7 @@ void Player::Update(float dt, std::vector<Projectile>& projectileList)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && fireCD.getElapsedTime().asSeconds() >= fireRate)
 	{
-		Shoot(projectileList, shot, sprite.getPosition() + shotOrigin);
+		Shoot(projectileList, shot, sprite.getPosition() + shotOrigin, this->sprite.getRotation());
 		fireCD.restart();
 	}
 }

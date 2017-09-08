@@ -36,6 +36,12 @@
     <ClInclude Include="src\Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\EnemyShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Strafer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -60,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Strafer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

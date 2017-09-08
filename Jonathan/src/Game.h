@@ -2,12 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
 #include "Player.h"
+#include "EnemyShip.h"
+#include "Strafer.h"
 
 class Game
 {
 public:
 	Player player;//Use a collection later ofc
-	std::vector<Projectile> projectileList;
+	std::vector<EnemyShip> hostileVec;
+	std::vector<Projectile> projectileVec;
 
 	void Load();
 	void Update();
