@@ -7,6 +7,7 @@ class GameObject
 public:
 	sf::Texture texture;
 	sf::Sprite sprite;
+	float radius;
 
 	GameObject();
 	~GameObject();

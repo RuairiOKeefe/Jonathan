@@ -1,12 +1,17 @@
 #include "Game.h"
 
+float Game::GetMagnitude(sf::Vector2f input)
+{
+	return sqrt((input.x*input.x) + (input.y*input.y));
+}
+
 void Game::Load()
 {
 	float xScale = 2;
 
 	for (int i = 0; i < 10; i++)
 	{
-		Strafer* strafer = new Strafer(sf::Vector2f(10.0f - (i * 32), 300), sf::Vector2f(1, 0));
+		Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 10), 300), sf::Vector2f(1, 0));
 		hostileVec.push_back(strafer);
 	}
 }
@@ -23,10 +28,11 @@ void Game::Update()
 		std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
 		while (ships != hostileVec.end())
 		{
-			if(shot->playerShot)
+			if (shot->playerShot && (GetMagnitude(shot->sprite.getPosition() - (*ships)->sprite.getPosition()) <= (shot->radius + (*ships)->radius)))
 				(*ships)->TakeDamage(shot->CheckHit((*ships)->sprite));
 			else
-				player.TakeDamage(shot->CheckHit(player.sprite));
+				if (!shot->playerShot && GetMagnitude(shot->sprite.getPosition() - player.sprite.getPosition()) <= (shot->radius + player.radius))
+					player.TakeDamage(shot->CheckHit(player.sprite));
 			ships++;
 		}
 

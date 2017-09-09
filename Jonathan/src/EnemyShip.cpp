@@ -12,7 +12,7 @@ EnemyShip::~EnemyShip()
 float EnemyShip::TurnTo(sf::Vector2f position)
 {
 	sf::Vector2f targetVec = position - sprite.getPosition();
-	targetVec = sqrtf((targetVec.x * targetVec.x) + (targetVec.y * targetVec.y)) * targetVec;
+	targetVec = targetVec / sqrtf((targetVec.x * targetVec.x) + (targetVec.y * targetVec.y));
 	float targetAngle = (atan2(targetVec.x, -targetVec.y) * 180 / M_PI);
 	float angleDifference = targetAngle - sprite.getRotation();
 	angleDifference += 180;

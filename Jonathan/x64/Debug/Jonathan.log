@@ -1,13 +1,7 @@
-﻿  Strafer.cpp
-  Player.cpp
-  Generating Code...
-  Compiling...
-  Main.cpp
-c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Game.cpp
+﻿  Game.cpp
   Generating Code...
   Skipping... (no relevant changes detected)
   SplashScreen.cpp
-  Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
-  Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)
+  MainMenu.cpp
+  Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
+  Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)

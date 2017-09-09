@@ -12,6 +12,7 @@ public:
 	std::vector<EnemyShip*> hostileVec;
 	std::vector<Projectile> projectileVec;
 
+	float GetMagnitude(sf::Vector2f input);
 	void Load();
 	void Update();
 	void Render(sf::RenderWindow &window);

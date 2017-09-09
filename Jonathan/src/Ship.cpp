@@ -22,6 +22,7 @@ void Ship::Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::V
 	newShot->playerShot = shot.playerShot;
 	newShot->speed = shot.speed;
 	newShot->damage = shot.damage;
+	newShot->radius = shot.radius;
 	newShot->SetPosition(shotOrigin);
 	newShot->sprite.setRotation(inAngle);
 	newShot->angle = inAngle;
