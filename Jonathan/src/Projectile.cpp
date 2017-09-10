@@ -41,7 +41,9 @@ float Projectile::CheckHit(sf::Sprite other)
 	return 0;
 }
 
-void Projectile::Update(float dt)
+void Projectile::Update(float dt, float maxX, float maxY)
 {
 	MoveShot(dt);
+	if (sprite.getPosition().x < -radius || sprite.getPosition().y < -radius || sprite.getPosition().x > maxX + radius || sprite.getPosition().y > maxX + radius)
+		despawn = true;
 }

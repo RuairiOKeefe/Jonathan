@@ -20,5 +20,5 @@ public:
 
 	void MoveShot(float dt);
 	float CheckHit(sf::Sprite other);
-	void Update(float dt);
+	void Update(float dt, float maxX, float maxY);
 };

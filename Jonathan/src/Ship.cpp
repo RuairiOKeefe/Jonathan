@@ -15,7 +15,7 @@ void Ship::TakeDamage(float damage)
 		despawn = true;
 }
 
-void Ship::Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle)
+void Ship::Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle) //Dead ships bullets do not seem to detect hits
 {
 	Projectile* newShot = new Projectile();
 	newShot->sprite = shot.sprite;

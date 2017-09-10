@@ -13,7 +13,7 @@ Player::~Player()
 	shot.~Projectile();
 }
 
-void Player::Update(float dt, std::vector<Projectile>& projectileList)
+void Player::Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY)
 {
 	sf::Vector2f move;
 
@@ -33,7 +33,12 @@ void Player::Update(float dt, std::vector<Projectile>& projectileList)
 	{
 		move.x++;
 	}
-	Move(move*speed*dt);
+	move *= speed*dt;
+	move.x = std::max((0.0f + radius) - sprite.getPosition().x, move.x);
+	move.x = std::min((maxX - radius) - sprite.getPosition().x, move.x);
+	move.y = std::max((0.0f + radius) - sprite.getPosition().y, move.y);
+	move.y = std::min((maxY - radius) - sprite.getPosition().y, move.y);
+	Move(move);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && fireCD.getElapsedTime().asSeconds() >= fireRate)
 	{

@@ -38,7 +38,7 @@ void MenuHandler(RenderWindow& window)
 	{
 	case MainMenu::Start:
 		state = Game;
-		game.Load();
+		game.Load(resolution.x / 2, resolution.y / 2);
 		break;
 	case MainMenu::Options:
 
@@ -102,10 +102,10 @@ int main()
 					window.close();
 				}
 			}
-			game.Update();//Determine if we want to do this or use a case statement in update and render
+			game.Update(resolution.x, resolution.y);
 			game.Render(window);
 			break;
-		case Pause: //This one may not be needed
+		case Pause:
 			break;
 		}
 		Update();

@@ -5,18 +5,25 @@ float Game::GetMagnitude(sf::Vector2f input)
 	return sqrt((input.x*input.x) + (input.y*input.y));
 }
 
-void Game::Load()
+void Game::Load(float posX, float posY)
 {
-	float xScale = 2;
-
+	//float xScale = 2;
+	player.SetPosition(sf::Vector2f(posX, posY));
 	for (int i = 0; i < 10; i++)
 	{
-		Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 10), 300), sf::Vector2f(1, 0));
+		Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 -(i*8)), sf::Vector2f(1, 0.2f));
 		hostileVec.push_back(strafer);
 	}
+	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
+	{
+		throw std::invalid_argument("Error Loading Font");
+	}
+	scoreText.setFont(scoreFont);
+	scoreText.setString("Score: " + std::to_string(score));
+	scoreText.setPosition(sf::Vector2f(posX / 100, 0.0f));
 }
 
-void Game::Update()
+void Game::Update(float maxX, float maxY)
 {
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
@@ -24,11 +31,11 @@ void Game::Update()
 	std::vector<Projectile>::iterator shot = projectileVec.begin();
 	while (shot != projectileVec.end())
 	{
-		shot->Update(dt);
+		shot->Update(dt, maxX, maxY);
 		std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
 		while (ships != hostileVec.end())
 		{
-			if (shot->playerShot && (GetMagnitude(shot->sprite.getPosition() - (*ships)->sprite.getPosition()) <= (shot->radius + (*ships)->radius)))
+			if ((*ships)->active && (shot->playerShot && (GetMagnitude(shot->sprite.getPosition() - (*ships)->sprite.getPosition()) <= (shot->radius + (*ships)->radius))))
 				(*ships)->TakeDamage(shot->CheckHit((*ships)->sprite));
 			else
 				if (!shot->playerShot && GetMagnitude(shot->sprite.getPosition() - player.sprite.getPosition()) <= (shot->radius + player.radius))
@@ -54,7 +61,7 @@ void Game::Update()
 	std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
 	while (ships != hostileVec.end())
 	{
-		(*ships)->Update(dt, projectileVec, player.sprite.getPosition());
+		(*ships)->Update(dt, projectileVec, player.sprite.getPosition(), maxX, maxY);
 		ships++;
 	}
 
@@ -62,6 +69,7 @@ void Game::Update()
 	{
 		if (hostileVec[n]->despawn)
 		{
+			score += hostileVec[n]->value;
 			hostileVec[n]->~EnemyShip();
 			hostileVec.erase(hostileVec.begin() + n);
 		}
@@ -70,7 +78,9 @@ void Game::Update()
 	}
 	hostileVec.shrink_to_fit();
 
-	player.Update(dt, projectileVec);
+	player.Update(dt, projectileVec, maxX, maxY);
+
+	scoreText.setString("Score: " + std::to_string(score));
 }
 
 void Game::Render(sf::RenderWindow &window)
@@ -88,4 +98,5 @@ void Game::Render(sf::RenderWindow &window)
 		window.draw((*ships)->sprite);
 		ships++;
 	}
+	window.draw(scoreText);
 }
