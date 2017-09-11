@@ -10,7 +10,6 @@ public:
 	~Strafer();
 
 	sf::Vector2f direction;
-	Projectile shot = Projectile("res/img/BasicShot.png", 300, 5);
 
 	void Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY);
 };

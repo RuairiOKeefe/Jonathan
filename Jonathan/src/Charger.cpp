@@ -8,6 +8,8 @@ Charger::Charger()
 	health = 5;
 	active = false;
 	value = 100;
+	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
+	weaponVec.push_back(basicWeapon);
 }
 
 Charger::Charger(sf::Vector2f spawnPosition)
@@ -19,6 +21,8 @@ Charger::Charger(sf::Vector2f spawnPosition)
 	health = 5;
 	active = false;
 	value = 100;
+	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
+	weaponVec.push_back(basicWeapon);
 }
 
 Charger::~Charger()
@@ -27,14 +31,18 @@ Charger::~Charger()
 
 void Charger::Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY)
 {
-	sf::Vector2f targetVec =  target - sprite.getPosition();
+	sf::Vector2f targetVec = target - sprite.getPosition();
 	targetVec = targetVec / sqrtf((targetVec.x * targetVec.x) + (targetVec.y * targetVec.y));
 	float targetAngle = (atan2(targetVec.x, -targetVec.y) * 180 / M_PI);
 	sprite.rotate(targetAngle - sprite.getRotation());
-	if (active && fireCD.getElapsedTime().asSeconds() >= fireRate)
+	if (active)
 	{
-		Shoot(projectileList, shot, sprite.getPosition() + shotOrigin, this->sprite.getRotation());
-		fireCD.restart();
+		std::vector<Weapon*>::iterator w = weaponVec.begin();
+		while (w != weaponVec.end())
+		{
+			(*w)->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
+			w++;
+		}
 	}
 	sf::Vector2f moveDir = target - sprite.getPosition();
 	moveDir = moveDir / sqrtf((moveDir.x * moveDir.x) + (moveDir.y * moveDir.y));

@@ -6,7 +6,6 @@ EnemyShip::EnemyShip()
 
 EnemyShip::~EnemyShip()
 {
-	shot.~Projectile();
 }
 
 float EnemyShip::TurnTo(sf::Vector2f position)

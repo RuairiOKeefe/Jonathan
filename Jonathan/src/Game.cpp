@@ -15,9 +15,9 @@ void Game::Load(float posX, float posY)
 		hostileVec.push_back(strafer);
 	}
 
-	for (int i = 0; i < 1; i++)
+	for (int i = -5; i < 5; i++)
 	{
-		Charger* charger = new Charger(sf::Vector2f(posX - 640 + (i * 64), -64));
+		Charger* charger = new Charger(sf::Vector2f(posX + (i * 64), -64));
 		hostileVec.push_back(charger);
 	}
 

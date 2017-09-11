@@ -6,11 +6,12 @@ Player::Player()
 	fireRate = 0.2f;
 	speed = 500.0f;
 	health = 100.0f;
+	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
+	weaponVec.push_back(basicWeapon);
 }
 
 Player::~Player()
 {
-	shot.~Projectile();
 }
 
 void Player::Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY)
@@ -40,9 +41,13 @@ void Player::Update(float dt, std::vector<Projectile>& projectileList, float max
 	move.y = std::min((maxY - radius) - sprite.getPosition().y, move.y);
 	Move(move);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && fireCD.getElapsedTime().asSeconds() >= fireRate)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		Shoot(projectileList, shot, sprite.getPosition() + shotOrigin, this->sprite.getRotation());
-		fireCD.restart();
+		std::vector<Weapon*>::iterator w = weaponVec.begin();
+		while (w != weaponVec.end())
+		{
+			(*w)->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);//Projectile returned is out of scope?
+			w++;
+		}
 	}
 }

@@ -1,9 +1,4 @@
-﻿  Game.cpp
-e:\programming\github\jonathan\jonathan\src\game.cpp(14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\programming\github\jonathan\jonathan\src\game.cpp(79): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  SplashScreen.cpp
-  MainMenu.cpp
-  Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
-  Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)
+﻿  Linear.cpp
+c:\users\40165151\documents\github\jonathan\jonathan\src\linear.cpp(9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
+  Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)
