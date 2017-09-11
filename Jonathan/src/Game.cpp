@@ -11,9 +11,16 @@ void Game::Load(float posX, float posY)
 	player.SetPosition(sf::Vector2f(posX, posY));
 	for (int i = 0; i < 10; i++)
 	{
-		Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 -(i*8)), sf::Vector2f(1, 0.2f));
+		Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 - (i * 8)), sf::Vector2f(1, 0.2f));
 		hostileVec.push_back(strafer);
 	}
+
+	for (int i = 0; i < 1; i++)
+	{
+		Charger* charger = new Charger(sf::Vector2f(posX - 640 + (i * 64), -64));
+		hostileVec.push_back(charger);
+	}
+
 	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
 	{
 		throw std::invalid_argument("Error Loading Font");
@@ -28,7 +35,7 @@ void Game::Update(float maxX, float maxY)
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
 	//player.sprite.rotate(dt*100.0f);
-	std::vector<Projectile>::iterator shot = projectileVec.begin();
+	std::vector<Projectile>::iterator shot = projectileVec.begin();//may need at least one hostile to have shots register
 	while (shot != projectileVec.end())
 	{
 		shot->Update(dt, maxX, maxY);

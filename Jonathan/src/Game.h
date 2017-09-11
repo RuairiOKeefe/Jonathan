@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "EnemyShip.h"
 #include "Strafer.h"
+#include "Charger.h"
 
 class Game
 {

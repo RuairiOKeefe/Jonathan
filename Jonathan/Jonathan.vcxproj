@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Charger.h" />
     <ClInclude Include="src\EnemyShip.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameObject.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="src\Strafer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Charger.cpp" />
     <ClCompile Include="src\EnemyShip.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />

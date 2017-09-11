@@ -1,4 +1,6 @@
-﻿  Ship.cpp
+﻿  Game.cpp
+e:\programming\github\jonathan\jonathan\src\game.cpp(14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\programming\github\jonathan\jonathan\src\game.cpp(79): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
   Skipping... (no relevant changes detected)
   SplashScreen.cpp
