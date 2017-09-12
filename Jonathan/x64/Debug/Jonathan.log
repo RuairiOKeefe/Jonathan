@@ -1,4 +1,5 @@
 ﻿  Linear.cpp
 c:\users\40165151\documents\github\jonathan\jonathan\src\linear.cpp(9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\linear.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
   Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)

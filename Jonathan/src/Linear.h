@@ -1,7 +1,9 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <SFML/Graphics.hpp>
 #include "Weapon.h"
 #include "Projectile.h"
+#include <math.h>
 
 class Linear : public Weapon
 {

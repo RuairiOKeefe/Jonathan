@@ -18,6 +18,6 @@ public:
 	int shotNumber;
 	bool playerShot = false;
 
-	virtual void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle) { throw std::invalid_argument("Error: Inherited class has no Shoot method"); };
-	virtual void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList) { throw std::invalid_argument("Error: Inherited class has no Update method"); };
+	virtual void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle) = 0;
+	virtual void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList) = 0;
 };

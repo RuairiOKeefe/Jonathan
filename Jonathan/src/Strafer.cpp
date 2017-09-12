@@ -8,8 +8,8 @@ Strafer::Strafer()
 	health = 5;
 	active = false;
 	value = 100;
-	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
-	weaponVec.push_back(basicWeapon);
+	Linear basicWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 0.5);
+	linearVec.push_back(basicWeapon);
 }
 
 Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
@@ -22,8 +22,8 @@ Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
 	health = 5;
 	active = false;
 	value = 100;
-	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
-	weaponVec.push_back(basicWeapon);
+	Linear basicWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 0.5);
+	linearVec.push_back(basicWeapon);
 }
 
 Strafer::~Strafer()
@@ -41,11 +41,11 @@ void Strafer::Update(float dt, std::vector<Projectile>& projectileList, sf::Vect
 	{
 		if (active)
 		{
-			std::vector<Weapon*>::iterator w = weaponVec.begin();
-			while (w != weaponVec.end())
+			std::vector<Linear>::iterator l = linearVec.begin();
+			while (l != linearVec.end())
 			{
-				(*w)->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
-				w++;
+				l->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);//Projectile returned is out of scope?
+				l++;
 			}
 		}
 	}

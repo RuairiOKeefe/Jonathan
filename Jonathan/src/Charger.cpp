@@ -8,8 +8,8 @@ Charger::Charger()
 	health = 5;
 	active = false;
 	value = 100;
-	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
-	weaponVec.push_back(basicWeapon);
+	Linear basicWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false , 0.5);
+	linearVec.push_back(basicWeapon);
 }
 
 Charger::Charger(sf::Vector2f spawnPosition)
@@ -21,8 +21,8 @@ Charger::Charger(sf::Vector2f spawnPosition)
 	health = 5;
 	active = false;
 	value = 100;
-	Linear* basicWeapon = new Linear(1, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
-	weaponVec.push_back(basicWeapon);
+	Linear basicWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 0.5);
+	linearVec.push_back(basicWeapon);
 }
 
 Charger::~Charger()
@@ -37,11 +37,11 @@ void Charger::Update(float dt, std::vector<Projectile>& projectileList, sf::Vect
 	sprite.rotate(targetAngle - sprite.getRotation());
 	if (active)
 	{
-		std::vector<Weapon*>::iterator w = weaponVec.begin();
-		while (w != weaponVec.end())
+		std::vector<Linear>::iterator l = linearVec.begin();
+		while (l != linearVec.end())
 		{
-			(*w)->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
-			w++;
+			l->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);//Projectile returned is out of scope?
+			l++;
 		}
 	}
 	sf::Vector2f moveDir = target - sprite.getPosition();

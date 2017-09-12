@@ -13,7 +13,7 @@ public:
 
 	float fireRate;
 	sf::Clock fireCD;
-	std::vector<Weapon*> weaponVec;
+	std::vector<Linear> linearVec;
 	sf::Vector2f shotOrigin;
 	float speed;
 	float health;
