@@ -6,8 +6,8 @@ Player::Player()
 	fireRate = 0.2f;
 	speed = 500.0f;
 	health = 100.0f;
-	linearWeapon = Linear(1, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
-	angularWeapon = Angular(0, 90, "res/img/BasicShot.png", 500, 5, true, 0.5);
+	linearWeapon = Linear(1, 16, "res/img/Shot1.png", 500, 5, true, 0.2);
+	angularWeapon = Angular(100, 360, "res/img/Shot1.png", 500, 5, true, 0.5);
 }
 
 Player::~Player()
@@ -22,12 +22,12 @@ void Player::Upgrade()
 	switch (level)
 	{
 	case 1:
-		linearWeapon = Linear(2, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
-		angularWeapon = Angular(0, 135, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		linearWeapon = Linear(2, 16, "res/img/Shot1.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(0, 135, "res/img/Shot1.png", 500, 5, true, 0.5);
 		break;
 	case 2:
-		linearWeapon = Linear(2, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
-		angularWeapon = Angular(2, 90, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		linearWeapon = Linear(2, 16, "res/img/Shot1.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(2, 90, "res/img/Shot1.png", 500, 5, true, 0.5);
 		break;
 	case 3:
 		linearWeapon = Linear(2, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);

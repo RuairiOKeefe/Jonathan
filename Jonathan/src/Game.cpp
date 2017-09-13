@@ -21,12 +21,12 @@ void Game::Load(float posX, float posY)
 		hostileVec.push_back(charger);
 	}
 
-	//for (int i = -5; i < 5; i++)
-	//{
-	//	PowerUp* powerUp = new PowerUp(sf::Vector2f(posX + (i * 64), 128));
-	//	powerUpVec.push_back(powerUp);
-	//}
-
+	for (int i = -5; i < 5; i++)
+	{
+		PowerUp* powerUp = new PowerUp(sf::Vector2f(posX + (i * 64), 128));
+		powerUpVec.push_back(powerUp);
+	}
+	powerUpSpawn = 5;
 	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
 	{
 		throw std::invalid_argument("Error Loading Font");
@@ -36,7 +36,7 @@ void Game::Load(float posX, float posY)
 	scoreText.setPosition(sf::Vector2f(posX / 100, 0.0f));
 }
 
-void Game::Update(float maxX, float maxY)
+void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
@@ -82,14 +82,19 @@ void Game::Update(float maxX, float maxY)
 	{
 		if (hostileVec[n]->despawn)
 		{
+			if (hostileVec[n]->value != 0)
+			{
+				deathCount++;
+				if (deathCount >= powerUpSpawn)
+				{
+					PowerUp* powerUp = new PowerUp(hostileVec[n]->sprite.getPosition());
+					powerUpVec.push_back(powerUp);
+					deathCount = 0;
+				}
+			}
 			score += hostileVec[n]->value;
 			hostileVec[n]->~EnemyShip();
 			hostileVec.erase(hostileVec.begin() + n);
-			if (hostileVec[n]->value != 0)
-			{
-				PowerUp* powerUp = new PowerUp(hostileVec[n]->sprite.getPosition());
-				powerUpVec.push_back(powerUp);
-			}
 		}
 		else
 			n++;
