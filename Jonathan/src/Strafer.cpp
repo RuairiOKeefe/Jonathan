@@ -8,8 +8,7 @@ Strafer::Strafer()
 	health = 5;
 	active = false;
 	value = 100;
-	Linear basicWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 0.5);
-	linearVec.push_back(basicWeapon);
+	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 5, false, 1.0);
 }
 
 Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
@@ -22,8 +21,7 @@ Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
 	health = 5;
 	active = false;
 	value = 100;
-	Linear basicWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 0.5);
-	linearVec.push_back(basicWeapon);
+	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 5, false, 1.0);
 }
 
 Strafer::~Strafer()
@@ -41,12 +39,8 @@ void Strafer::Update(float dt, std::vector<Projectile>& projectileList, sf::Vect
 	{
 		if (active)
 		{
-			std::vector<Linear>::iterator l = linearVec.begin();
-			while (l != linearVec.end())
-			{
-				l->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);//Projectile returned is out of scope?
-				l++;
-			}
+			linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
+			angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
 		}
 	}
 	Move(speed * direction * dt);

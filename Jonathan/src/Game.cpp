@@ -21,6 +21,12 @@ void Game::Load(float posX, float posY)
 		hostileVec.push_back(charger);
 	}
 
+	//for (int i = -5; i < 5; i++)
+	//{
+	//	PowerUp* powerUp = new PowerUp(sf::Vector2f(posX + (i * 64), 128));
+	//	powerUpVec.push_back(powerUp);
+	//}
+
 	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
 	{
 		throw std::invalid_argument("Error Loading Font");
@@ -34,7 +40,7 @@ void Game::Update(float maxX, float maxY)
 {
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
-	//player.sprite.rotate(dt*100.0f);
+	//player.sprite.rotate(dt*10.0f);
 	std::vector<Projectile>::iterator shot = projectileVec.begin();//may need at least one hostile to have shots register
 	while (shot != projectileVec.end())
 	{
@@ -79,11 +85,42 @@ void Game::Update(float maxX, float maxY)
 			score += hostileVec[n]->value;
 			hostileVec[n]->~EnemyShip();
 			hostileVec.erase(hostileVec.begin() + n);
+			if (hostileVec[n]->value != 0)
+			{
+				PowerUp* powerUp = new PowerUp(hostileVec[n]->sprite.getPosition());
+				powerUpVec.push_back(powerUp);
+			}
 		}
 		else
 			n++;
 	}
 	hostileVec.shrink_to_fit();
+
+	std::vector<PowerUp*>::iterator powerUp = powerUpVec.begin();
+	while (powerUp != powerUpVec.end())
+	{
+		(*powerUp)->Update();
+		if (GetMagnitude((*powerUp)->sprite.getPosition() - player.sprite.getPosition()) <= ((*powerUp)->radius + player.radius))
+		{
+			if ((*powerUp)->CheckPickup(player.sprite))
+			{
+				player.Upgrade();
+			}
+		}
+		powerUp++;
+	}
+
+	for (std::vector<PowerUp*>::size_type n = 0; n < powerUpVec.size();)
+	{
+		if (powerUpVec[n]->despawn)
+		{
+			powerUpVec[n]->~PowerUp();
+			powerUpVec.erase(powerUpVec.begin() + n);
+		}
+		else
+			n++;
+	}
+	powerUpVec.shrink_to_fit();
 
 	player.Update(dt, projectileVec, maxX, maxY);
 
@@ -97,6 +134,12 @@ void Game::Render(sf::RenderWindow &window)
 	{
 		window.draw(shot->sprite);
 		shot++;
+	}
+	std::vector<PowerUp*>::iterator powerUp = powerUpVec.begin();
+	while (powerUp != powerUpVec.end())
+	{
+		window.draw((*powerUp)->sprite);
+		powerUp++;
 	}
 	window.draw(player.sprite);
 	std::vector<EnemyShip*>::iterator ships = hostileVec.begin();

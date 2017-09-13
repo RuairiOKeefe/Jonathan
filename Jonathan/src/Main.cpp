@@ -34,7 +34,7 @@ void Load()
 void MenuHandler(RenderWindow& window)
 {
 	mainMenu.Render(window);
-	switch(mainMenu.GetMenuResponse(window))
+	switch (mainMenu.GetMenuResponse(window))
 	{
 	case MainMenu::Start:
 		state = Game;
@@ -53,7 +53,7 @@ void MenuHandler(RenderWindow& window)
 
 void Update()
 {
-	
+
 }
 
 void Render(RenderWindow &window)
@@ -64,7 +64,7 @@ void Render(RenderWindow &window)
 int main()
 {
 	resolution = defaultRes;
-	RenderWindow window(VideoMode(resolution.x, resolution.y), "ArseBiscuits");//Look into fullscreening
+	RenderWindow window(VideoMode(resolution.x, resolution.y), "ArseBiscuits"/*, sf::Style::Fullscreen*/);
 	try
 	{
 		Load();

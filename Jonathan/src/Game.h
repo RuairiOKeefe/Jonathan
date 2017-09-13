@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "EnemyShip.h"
+#include "PowerUp.h"
 #include "Strafer.h"
 #include "Charger.h"
 
@@ -12,6 +13,7 @@ public:
 	Player player;
 	std::vector<EnemyShip*> hostileVec;
 	std::vector<Projectile> projectileVec;
+	std::vector<PowerUp*> powerUpVec;
 	sf::Font scoreFont;
 	sf::Text scoreText;
 	int score;

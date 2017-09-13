@@ -15,6 +15,5 @@ public:
 	Projectile* shot = new Projectile();
 	float spacing;
 
-	void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle);
 	void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList);
 };

@@ -6,12 +6,62 @@ Player::Player()
 	fireRate = 0.2f;
 	speed = 500.0f;
 	health = 100.0f;
-	Linear basicWeapon = Linear(2, 1, "res/img/BasicShot.png", 300, 5, true, 0.5);
-	linearVec.push_back(basicWeapon);
+	linearWeapon = Linear(1, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+	angularWeapon = Angular(0, 90, "res/img/BasicShot.png", 500, 5, true, 0.5);
 }
 
 Player::~Player()
 {
+}
+
+void Player::Upgrade()
+{
+	level = level++;
+	if (level > 10)
+		level = 10;
+	switch (level)
+	{
+	case 1:
+		linearWeapon = Linear(2, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(0, 135, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 2:
+		linearWeapon = Linear(2, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(2, 90, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 3:
+		linearWeapon = Linear(2, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(4, 135, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 4:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 5:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 6:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 7:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 8:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 9:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	case 10:
+		linearWeapon = Linear(3, 16, "res/img/BasicShot.png", 500, 5, true, 0.2);
+		angularWeapon = Angular(6, 180, "res/img/BasicShot.png", 500, 5, true, 0.5);
+		break;
+	}
 }
 
 void Player::Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY)
@@ -43,11 +93,7 @@ void Player::Update(float dt, std::vector<Projectile>& projectileList, float max
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		std::vector<Linear>::iterator l = linearVec.begin();
-		while (l != linearVec.end())
-		{
-			l->Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);//Projectile returned is out of scope?
-			l++;
-		}
+		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
+		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
 	}
 }

@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "Weapon.h"
 #include "Linear.h"
+#include "Angular.h"
 
 class Ship : public GameObject
 {
@@ -13,7 +14,8 @@ public:
 
 	float fireRate;
 	sf::Clock fireCD;
-	std::vector<Linear> linearVec;
+	Linear linearWeapon;
+	Angular angularWeapon;
 	sf::Vector2f shotOrigin;
 	float speed;
 	float health;

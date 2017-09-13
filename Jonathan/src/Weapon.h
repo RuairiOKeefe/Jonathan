@@ -18,6 +18,6 @@ public:
 	int shotNumber;
 	bool playerShot = false;
 
-	virtual void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle) = 0;
+	void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle);
 	virtual void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList) = 0;
 };
