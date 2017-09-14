@@ -39,7 +39,7 @@ void MenuHandler(RenderWindow& window)
 {
 	mainMenu.Render(window);
 
-	switch (mainMenu.GetMenuResponse(window))
+	switch (mainMenu.GetMenuResponse(window, defaultRes.x, defaultRes.y))
 	{
 	case MainMenu::Start:
 		state = Game;
@@ -112,6 +112,7 @@ int main()
 		case Splash:
 			splashScreen.Show(window, (float)resolution.x, (float)resolution.y);
 			state = Menu;
+			mainMenu.buttonClock.restart();
 			break;
 		case Menu:
 			MenuHandler(window);

@@ -12,14 +12,21 @@ MainMenu::~MainMenu()
 
 void MainMenu::Load(float xRes, float yRes)
 {
-	if (!menuTexture.loadFromFile("res/img/MenuScreen.png")) //Uses Ebrima Bold
+	if (!menuTexture.loadFromFile("../res/img/MenuScreen.png")) //Uses Ebrima Bold
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
 	menuSprite.setTexture(menuTexture);
 
+	if (!selectorTexture.loadFromFile("../res/img/Selector.png")) //Uses Ebrima Bold
+	{
+		throw std::invalid_argument("Error Loading Texture");
+	}
+	selectorSprite.setTexture(selectorTexture);
+	selectorSprite.setOrigin(sf::Vector2f(selectorTexture.getSize().x / 2, selectorTexture.getSize().y / 2));
+
 	Button startButton;
-	if (!startTexture.loadFromFile("res/img/StartButton.png"))
+	if (!startTexture.loadFromFile("../res/img/StartButton.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -29,7 +36,7 @@ void MainMenu::Load(float xRes, float yRes)
 	startButton.action = Start;
 
 	Button optionsButton;
-	if (!optionsTexture.loadFromFile("res/img/OptionsButton.png"))
+	if (!optionsTexture.loadFromFile("../res/img/OptionsButton.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -39,7 +46,7 @@ void MainMenu::Load(float xRes, float yRes)
 	optionsButton.action = Options;
 
 	Button exitButton;
-	if (!exitTexture.loadFromFile("res/img/ExitButton.png"))
+	if (!exitTexture.loadFromFile("../res/img/ExitButton.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -48,14 +55,14 @@ void MainMenu::Load(float xRes, float yRes)
 	exitButton.sprite.setPosition(sf::Vector2f(xRes / 2, (yRes / 2) + exitTexture.getSize().y * 3.0f));
 	exitButton.action = Exit;
 
-	if (!optionsMenuTexture.loadFromFile("res/img/OptionsScreen.png")) //Uses Ebrima Bold
+	if (!optionsMenuTexture.loadFromFile("../res/img/OptionsScreen.png")) //Uses Ebrima Bold
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
 	optionsMenuSprite.setTexture(optionsMenuTexture);
 
 	Button res1Button;
-	if (!res1Texture.loadFromFile("res/img/res1.png"))
+	if (!res1Texture.loadFromFile("../res/img/res1.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -65,7 +72,7 @@ void MainMenu::Load(float xRes, float yRes)
 	res1Button.action = Res1;
 
 	Button res2Button;
-	if (!res2Texture.loadFromFile("res/img/res2.png"))
+	if (!res2Texture.loadFromFile("../res/img/res2.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -75,7 +82,7 @@ void MainMenu::Load(float xRes, float yRes)
 	res2Button.action = Res2;
 
 	Button res3Button;
-	if (!res3Texture.loadFromFile("res/img/res3.png"))
+	if (!res3Texture.loadFromFile("../res/img/res3.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -85,7 +92,7 @@ void MainMenu::Load(float xRes, float yRes)
 	res3Button.action = Res3;
 
 	Button fullscreenButton;
-	if (!fullscreenTexture.loadFromFile("res/img/Fullscreen.png"))
+	if (!fullscreenTexture.loadFromFile("../res/img/Fullscreen.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -95,7 +102,7 @@ void MainMenu::Load(float xRes, float yRes)
 	fullscreenButton.action = Fullscreen;
 
 	Button windowedButton;
-	if (!windowedTexture.loadFromFile("res/img/Windowed.png"))
+	if (!windowedTexture.loadFromFile("../res/img/Windowed.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -105,7 +112,7 @@ void MainMenu::Load(float xRes, float yRes)
 	windowedButton.action = Windowed;
 
 	Button backButton;
-	if (!backTexture.loadFromFile("res/img/Back.png"))
+	if (!backTexture.loadFromFile("../res/img/Back.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -126,24 +133,51 @@ void MainMenu::Load(float xRes, float yRes)
 	optionsButtons.push_back(backButton);
 }
 
-MainMenu::Selection MainMenu::GetMenuResponse(sf::RenderWindow & window)
+MainMenu::Selection MainMenu::GetMenuResponse(sf::RenderWindow & window, float xRes, float yRes)
 {
 	sf::Event event;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		window.close();
-	}
 	while (window.pollEvent(event))
 	{
-		if (event.type == sf::Event::MouseButtonPressed)
-		{
-			return HandleClick(event.mouseButton.x, event.mouseButton.y);
-		}
 		if (event.type == sf::Event::Closed)
 		{
 			return Exit;
 		}
 	}
+	if (scrollClock.getElapsedTime().asSeconds() >= scrollTimer)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || ((sf::Joystick::isConnected(0)) && (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < -20)))
+		{
+			hoveredItem--;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || ((sf::Joystick::isConnected(0)) && (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > 20)))
+		{
+			hoveredItem++;
+		}
+		scrollClock.restart();
+	}
+	if (!options)
+	{
+		if (hoveredItem < 1)
+			hoveredItem = 1;
+		if (hoveredItem > 3)
+			hoveredItem = 3;
+		selectorSprite.setPosition(sf::Vector2f(xRes / 2.0f, (yRes / 2) + (selectorTexture.getSize().y * ((hoveredItem - 1) * 1.5f))));
+	}
+	else
+	{
+		if (hoveredItem < 4)
+			hoveredItem = 4;
+		if (hoveredItem > 9)
+			hoveredItem = 9;
+		selectorSprite.setPosition(sf::Vector2f(xRes / 2.0f, (yRes / 2) + (selectorTexture.getSize().y * (hoveredItem - 6.0f))));
+	}
+
+	if ((buttonClock.getElapsedTime().asSeconds() >= buttonTimer) && (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || (sf::Joystick::isConnected(0) && (sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) < -20) || (sf::Joystick::isButtonPressed(0, 2)))))
+	{
+		buttonClock.restart();
+		return Selection(hoveredItem);
+	}
+
 	return Null;
 }
 
@@ -152,6 +186,7 @@ void MainMenu::Render(sf::RenderWindow & window)
 	if (!options)
 	{
 		window.draw(menuSprite);
+		window.draw(selectorSprite);
 		for each (Button btn in mainButtons)
 		{
 			window.draw(btn.sprite);
@@ -160,6 +195,7 @@ void MainMenu::Render(sf::RenderWindow & window)
 	else
 	{
 		window.draw(optionsMenuSprite);
+		window.draw(selectorSprite);
 		for each (Button btn in optionsButtons)
 		{
 			window.draw(btn.sprite);

@@ -32,12 +32,15 @@ public:
 	~MainMenu();
 
 	bool options = false;
-	int hoveredItem;
+	int hoveredItem = 1;
 	sf::Clock scrollClock;
-	float scrollTimer = 0.5;
+	float scrollTimer = 0.1;
+	sf::Clock buttonClock;
+	float buttonTimer = 0.5;
+
 
 	void Load(float xRes, float yRes);
-	Selection GetMenuResponse(sf::RenderWindow &window);
+	Selection GetMenuResponse(sf::RenderWindow &window, float xRes, float yRes);
 	void Render(sf::RenderWindow &window);
 private:
 	sf::Texture menuTexture;
@@ -54,6 +57,9 @@ private:
 	sf::Texture windowedTexture;
 	sf::Texture backTexture;
 	sf::Sprite optionsMenuSprite;
+
+	sf::Texture selectorTexture;
+	sf::Sprite selectorSprite;
 
 	Selection HandleClick(int x, int y);
 	std::list<Button> mainButtons;

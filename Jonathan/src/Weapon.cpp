@@ -22,5 +22,5 @@ void Weapon::Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf:
 	newShot->sprite.setRotation(inAngle);
 	newShot->angle = inAngle;
 	projectileList.push_back(*newShot);
-	soundProvider.PlaySound("res/Audio/Buchew.ogg");
+	soundProvider.PlaySound("../res/Audio/Buchew.ogg");
 }

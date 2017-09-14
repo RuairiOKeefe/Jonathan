@@ -17,7 +17,7 @@ void SplashScreen::Show(sf::RenderWindow& window, float xRes, float yRes)
 	float fadeIn = 2;
 	float stayTime = 3;
 	float fadeOut = 3;
-	if (!texture.loadFromFile("res/img/TempSplash.png"))
+	if (!texture.loadFromFile("../res/img/TempSplash.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -53,7 +53,7 @@ void SplashScreen::Show(sf::RenderWindow& window, float xRes, float yRes)
 			{
 				window.close();
 			}
-			if (event.type == sf::Event::EventType::KeyPressed || event.type == sf::Event::EventType::MouseButtonPressed)
+			if (event.type == sf::Event::EventType::KeyPressed || event.type == sf::Event::EventType::MouseButtonPressed || event.type == sf::Event::EventType::JoystickButtonPressed)
 			{
 				return;
 			}

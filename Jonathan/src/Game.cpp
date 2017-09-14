@@ -9,7 +9,7 @@ float Game::GetMagnitude(sf::Vector2f input)
 
 void Game::Load(float posX, float posY)
 {
-	if (!bgTexture.loadFromFile("res/img/Space.png"))
+	if (!bgTexture.loadFromFile("../res/img/Space.png"))
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
@@ -19,18 +19,18 @@ void Game::Load(float posX, float posY)
 	spawnClock.restart();
 	powerUpSpawn = 5 * (wavesSpawned + 1);//Enemies till next spawn
 
-	if (!font.loadFromFile("res/fonts/ebrimabd.ttf"))
+	if (!font.loadFromFile("../res/fonts/ebrimabd.ttf"))
 	{
 		throw std::invalid_argument("Error Loading Font");
 	}
 	highscoreText.setFont(font);
-	highscoreText.setString("Score: " + std::to_string(highscore));
+	highscoreText.setString("Highscore: ");
 	highscoreText.setPosition(sf::Vector2f(10.0f, 10.0f));
 	scoreText.setFont(font);
-	scoreText.setString("Score: " + std::to_string(score));
+	scoreText.setString("Score: ");
 	scoreText.setPosition(sf::Vector2f(10.0f, 40.0f));
 	healthText.setFont(font);
-	healthText.setString("Health: " + std::to_string((int)player.health));
+	healthText.setString("Health: ");
 	healthText.setPosition(sf::Vector2f(posX, 10.0f));
 }
 
@@ -41,8 +41,9 @@ void Game::Reset()
 	powerUpVec.clear();
 	player.health = player.maxHealth;
 	player.level = 0;
-	player.linearWeapon = Linear(1, 16, "res/img/Shot1.png", 1000, 5, true, 0.25);
-	player.angularWeapon = Angular(0, 90, "res/img/Shot1.png", 500, 5, true, 0.5);
+	player.linearWeapon = Linear(1, 16, "../res/img/Shot1.png", 1000, 5, true, 0.25);
+	player.angularWeapon = Angular(0, 90, "../res/img/Shot1.png", 500, 5, true, 0.5);
+	deathCount = 0;
 	wavesSpawned = 0;
 	if (score > highscore)
 		highscore = score;
@@ -51,7 +52,7 @@ void Game::Reset()
 
 bool Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Joystick::isButtonPressed(0, 6))
 	{
 		return false;
 	}
@@ -100,7 +101,7 @@ bool Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 		{
 			if (hostileVec[n]->value != 0)
 			{
-				soundProvider.PlaySound("res/Audio/Paaaw.ogg");
+				soundProvider.PlaySound("../res/Audio/Paaaw.ogg");
 				deathCount++;
 				if (deathCount >= powerUpSpawn)
 				{
