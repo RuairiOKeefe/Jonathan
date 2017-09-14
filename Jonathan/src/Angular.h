@@ -15,5 +15,5 @@ public:
 	Projectile* shot = new Projectile();
 	float cone;
 
-	void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList);
+	void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList, SFMLSoundProvider &soundProvider);
 };

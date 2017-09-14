@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Game.h"
 
 float Game::GetMagnitude(sf::Vector2f input)
@@ -9,11 +11,11 @@ void Game::Load(float posX, float posY)
 {
 	//float xScale = 2;
 	player.SetPosition(sf::Vector2f(posX, posY));
-	for (int i = 0; i < 10; i++)
-	{
-		Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 - (i * 8)), sf::Vector2f(1, 0.2f));
-		hostileVec.push_back(strafer);
-	}
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 - (i * 8)), sf::Vector2f(1, 0.2f));
+	//	hostileVec.push_back(strafer);
+	//}
 
 	for (int i = -5; i < 5; i++)
 	{
@@ -21,12 +23,14 @@ void Game::Load(float posX, float posY)
 		hostileVec.push_back(charger);
 	}
 
-	for (int i = -5; i < 5; i++)
-	{
-		PowerUp* powerUp = new PowerUp(sf::Vector2f(posX + (i * 64), 128));
-		powerUpVec.push_back(powerUp);
-	}
-	powerUpSpawn = 5;
+	//for (int i = -5; i < 5; i++)
+	//{
+	//	PowerUp* powerUp = new PowerUp(sf::Vector2f(posX + (i * 64), 128));
+	//	powerUpVec.push_back(powerUp);
+	//}
+
+	powerUpSpawn = 5;//Enemies till next spawn
+
 	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
 	{
 		throw std::invalid_argument("Error Loading Font");
@@ -38,6 +42,7 @@ void Game::Load(float posX, float posY)
 
 void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
+	//soundProvider.PlaySound("res/Audio/Buchew.ogg");
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
 	//player.sprite.rotate(dt*10.0f);
@@ -74,7 +79,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 	std::vector<EnemyShip*>::iterator ships = hostileVec.begin();
 	while (ships != hostileVec.end())
 	{
-		(*ships)->Update(dt, projectileVec, player.sprite.getPosition(), maxX, maxY);
+		(*ships)->Update(dt, projectileVec, player.sprite.getPosition(), maxX, maxY, soundProvider);
 		ships++;
 	}
 
@@ -84,6 +89,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 		{
 			if (hostileVec[n]->value != 0)
 			{
+				soundProvider.PlaySound("res/Audio/Paaaw.ogg");
 				deathCount++;
 				if (deathCount >= powerUpSpawn)
 				{
@@ -127,7 +133,36 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 	}
 	powerUpVec.shrink_to_fit();
 
-	player.Update(dt, projectileVec, maxX, maxY);
+	player.Update(dt, projectileVec, maxX, maxY, soundProvider);
+
+	if (spawnClock.getElapsedTime().asSeconds() >= 10.0f)
+	{
+		for (int i = 0; i < 10 * wavesSpawned; i++)
+		{
+			Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 - (i * 8)), sf::Vector2f(1, 0.2f));
+			hostileVec.push_back(strafer);
+		}
+
+		if (wavesSpawned > 0)
+		{
+			for (int i = -5 * wavesSpawned; i < 5 * wavesSpawned; i++)
+			{
+				Charger* charger = new Charger(sf::Vector2f((maxX/2) + (i * 64), -64));
+				hostileVec.push_back(charger);
+			}
+		}
+		if (wavesSpawned > 1)
+		{
+			for (int i = 0; i < 10 * wavesSpawned; i++)
+			{
+				Strafer* strafer = new Strafer(sf::Vector2f(maxX + (i * 40), 100 - (i * 8)), sf::Vector2f(-1, 0.2f));
+				hostileVec.push_back(strafer);
+			}
+		}
+
+		spawnClock.restart();
+		wavesSpawned++;
+	}
 
 	scoreText.setString("Score: " + std::to_string(score));
 }

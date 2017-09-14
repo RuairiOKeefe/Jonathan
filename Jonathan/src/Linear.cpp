@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Linear.h"
 
 Linear::Linear() : Weapon()
@@ -16,7 +18,7 @@ Linear::~Linear()
 {
 }
 
-void Linear::Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList)
+void Linear::Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList, SFMLSoundProvider &soundProvider)
 {
 	float radAngle = angle / 180 * M_PI;
 	sf::Vector2f angleVector = sf::Vector2f(cosf(radAngle), -sinf(radAngle));
@@ -26,7 +28,7 @@ void Linear::Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<
 	{
 		for (int i = 0; i < shotNumber; i++)
 		{
-			Shoot(projectileList, *shot, shotOrigin + (angleVector * spacing * (float)i) - (angleVector *(spacing * (shotNumber-1) / 2)), angle);
+			Shoot(projectileList, *shot, shotOrigin + (angleVector * spacing * (float)i) - (angleVector *(spacing * (shotNumber-1) / 2)), angle, soundProvider);
 		}
 		fireCD.restart();
 	}

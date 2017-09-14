@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Player.h"
 
 Player::Player()
@@ -7,7 +9,7 @@ Player::Player()
 	speed = 500.0f;
 	health = 100.0f;
 	linearWeapon = Linear(1, 16, "res/img/Shot1.png", 500, 5, true, 0.2);
-	angularWeapon = Angular(100, 360, "res/img/Shot1.png", 500, 5, true, 0.5);
+	angularWeapon = Angular(0, 90, "res/img/Shot1.png", 500, 5, true, 0.5);
 }
 
 Player::~Player()
@@ -64,7 +66,7 @@ void Player::Upgrade()
 	}
 }
 
-void Player::Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY)
+void Player::Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
 	sf::Vector2f move;
 
@@ -84,6 +86,20 @@ void Player::Update(float dt, std::vector<Projectile>& projectileList, float max
 	{
 		move.x++;
 	}
+	if (sf::Joystick::isConnected(0))
+	{
+		float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		if (x > 20 || x < -20)
+			move.x += x * 100;
+		float y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+		if (y > 20 || y < -20)
+			move.y = y * 100;
+	}
+
+	float moveMagnitude = sqrt((move.x*move.x) + (move.y*move.y));
+	if (moveMagnitude > 1.0f)
+		move /= moveMagnitude;
+
 	move *= speed*dt;
 	move.x = std::max((0.0f + radius) - sprite.getPosition().x, move.x);
 	move.x = std::min((maxX - radius) - sprite.getPosition().x, move.x);
@@ -91,9 +107,9 @@ void Player::Update(float dt, std::vector<Projectile>& projectileList, float max
 	move.y = std::min((maxY - radius) - sprite.getPosition().y, move.y);
 	Move(move);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || (sf::Joystick::isConnected(0) && sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z) < -20))
 	{
-		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
-		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
+		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
+		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
 	}
 }

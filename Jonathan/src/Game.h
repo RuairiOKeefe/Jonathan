@@ -16,6 +16,8 @@ public:
 	std::vector<EnemyShip*> hostileVec;
 	std::vector<Projectile> projectileVec;
 	std::vector<PowerUp*> powerUpVec;
+	sf::Clock spawnClock;
+	int wavesSpawned;
 	int deathCount;
 	int powerUpSpawn;
 	sf::Font scoreFont;

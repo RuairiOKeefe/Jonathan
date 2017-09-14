@@ -11,5 +11,5 @@ public:
 	int level = 0;
 
 	void Upgrade();
-	void Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY);
+	void Update(float dt, std::vector<Projectile>& projectileList, float maxX, float maxY, SFMLSoundProvider &soundProvider);
 };

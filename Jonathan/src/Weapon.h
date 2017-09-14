@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
+#include "SFMLSoundProvider.h"
+#include "ServiceLocator.h"
 #include "Projectile.h"
 
 class Weapon : public GameObject
@@ -18,6 +20,6 @@ public:
 	int shotNumber;
 	bool playerShot = false;
 
-	void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle);
-	virtual void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList) = 0;
+	void Shoot(std::vector<Projectile>& projectileList, Projectile shot, sf::Vector2f shotOrigin, float inAngle, SFMLSoundProvider &soundProvider);
+	virtual void Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList, SFMLSoundProvider &soundProvider) = 0;
 };

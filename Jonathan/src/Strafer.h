@@ -11,5 +11,5 @@ public:
 
 	sf::Vector2f direction;
 
-	void Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY);
+	void Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY, SFMLSoundProvider &soundProvider);
 };

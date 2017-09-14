@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Strafer.h"
 
 Strafer::Strafer()
@@ -8,7 +10,7 @@ Strafer::Strafer()
 	health = 5;
 	active = false;
 	value = 100;
-	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 5, false, 1.0);
+	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 10, false, 2.0);
 }
 
 Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
@@ -21,14 +23,14 @@ Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
 	health = 5;
 	active = false;
 	value = 100;
-	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 5, false, 1.0);
+	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 10, false, 2.0);
 }
 
 Strafer::~Strafer()
 {
 }
 
-void Strafer::Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY)
+void Strafer::Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
 	float turnAngle = TurnTo(target);
 	if (turnAngle > 0.5f || turnAngle < -0.5f)
@@ -39,8 +41,8 @@ void Strafer::Update(float dt, std::vector<Projectile>& projectileList, sf::Vect
 	{
 		if (active)
 		{
-			linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
-			angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
+			linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
+			angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
 		}
 	}
 	Move(speed * direction * dt);

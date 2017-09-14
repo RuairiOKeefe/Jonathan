@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Angular.h"
 
 Angular::Angular()
@@ -16,13 +18,13 @@ Angular::~Angular()
 {
 }
 
-void Angular::Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList)
+void Angular::Update(float dt, float angle, sf::Vector2f shotOrigin, std::vector<Projectile>& projectileList, SFMLSoundProvider &soundProvider)
 {
 	if (fireCD.getElapsedTime().asSeconds() >= fireRate)
 	{
 		for (int i = 0; i < shotNumber; i++)
 		{
-			Shoot(projectileList, *shot, shotOrigin, angle - (cone / 2) + ((cone / (shotNumber-1)) * i));
+			Shoot(projectileList, *shot, shotOrigin, angle - (cone / 2) + ((cone / (shotNumber-1)) * i), soundProvider);
 		}
 		fireCD.restart();
 	}

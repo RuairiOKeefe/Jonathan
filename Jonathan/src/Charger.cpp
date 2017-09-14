@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Charger.h"
 
 Charger::Charger()
@@ -8,7 +10,7 @@ Charger::Charger()
 	health = 5;
 	active = false;
 	value = 50;
-	linearWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false , 0.5);
+	linearWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 1.0);
 }
 
 Charger::Charger(sf::Vector2f spawnPosition)
@@ -20,14 +22,14 @@ Charger::Charger(sf::Vector2f spawnPosition)
 	health = 5;
 	active = false;
 	value = 50;
-	linearWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 0.5);
+	linearWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 1.0);
 }
 
 Charger::~Charger()
 {
 }
 
-void Charger::Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY)
+void Charger::Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
 	sf::Vector2f targetVec = target - sprite.getPosition();
 	targetVec = targetVec / sqrtf((targetVec.x * targetVec.x) + (targetVec.y * targetVec.y));
@@ -35,8 +37,8 @@ void Charger::Update(float dt, std::vector<Projectile>& projectileList, sf::Vect
 	sprite.rotate(targetAngle - sprite.getRotation());
 	if (active)
 	{
-		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
-		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList);
+		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
+		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
 	}
 	sf::Vector2f moveDir = target - sprite.getPosition();
 	moveDir = moveDir / sqrtf((moveDir.x * moveDir.x) + (moveDir.y * moveDir.y));

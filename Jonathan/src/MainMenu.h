@@ -11,7 +11,13 @@ public:
 		Null,
 		Start,
 		Options,
-		Exit
+		Exit,
+		Res1,
+		Res2,
+		Res3,
+		Fullscreen,
+		Windowed,
+		Back
 	};
 
 	struct Button
@@ -25,6 +31,8 @@ public:
 	MainMenu();
 	~MainMenu();
 
+	bool options = false;
+
 	void Load(float xRes, float yRes);
 	Selection GetMenuResponse(sf::RenderWindow &window);
 	void Render(sf::RenderWindow &window);
@@ -35,6 +43,16 @@ private:
 	sf::Texture exitTexture;
 	sf::Sprite menuSprite;
 
+	sf::Texture optionsMenuTexture;
+	sf::Texture res1Texture;
+	sf::Texture res2Texture;
+	sf::Texture res3Texture;
+	sf::Texture fullscreenTexture;
+	sf::Texture windowedTexture;
+	sf::Texture backTexture;
+	sf::Sprite optionsMenuSprite;
+
 	Selection HandleClick(int x, int y);
-	std::list<Button> buttons;
+	std::list<Button> mainButtons;
+	std::list<Button> optionsButtons;
 };
