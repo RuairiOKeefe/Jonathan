@@ -18,6 +18,7 @@ public:
 	Angular angularWeapon;
 	sf::Vector2f shotOrigin;
 	float speed;
+	float maxHealth;
 	float health;
 	bool despawn = false;
 

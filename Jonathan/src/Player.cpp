@@ -7,7 +7,8 @@ Player::Player()
 	SetTexture("res/img/ship.png");
 	fireRate = 0.2f;
 	speed = 500.0f;
-	health = 100.0f;
+	maxHealth = 200.0f;
+	health = maxHealth;
 	linearWeapon = Linear(1, 16, "res/img/Shot1.png", 1000, 5, true, 0.25);
 	angularWeapon = Angular(0, 90, "res/img/Shot1.png", 500, 5, true, 0.5);
 }
@@ -19,6 +20,7 @@ Player::~Player()
 void Player::Upgrade()
 {
 	level = level++;
+	health = maxHealth;
 	if (level > 10)
 		level = 10;
 	switch (level)

@@ -7,7 +7,8 @@ Charger::Charger()
 	SetTexture("res/img/Charger.png");
 	speed = 200.0f;
 	fireRate = 0.5f;
-	health = 10;
+	maxHealth = 10;
+	health = maxHealth;
 	active = false;
 	value = 50;
 	linearWeapon = Linear(1, 1, "res/img/Shot1.png", 300, 5, false, 1.0);

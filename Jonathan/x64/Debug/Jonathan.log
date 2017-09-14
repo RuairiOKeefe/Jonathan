@@ -1,5 +1,20 @@
-﻿  Strafer.cpp
-  Charger.cpp
-c:\users\40165151\documents\github\jonathan\jonathan\src\charger.cpp(36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Main.cpp
+c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\main.cpp(72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MainMenu.cpp
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(27): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(37): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(47): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(63): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(73): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(83): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(93): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(103): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(113): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(179): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\40165151\documents\github\jonathan\jonathan\src\mainmenu.cpp(192): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe
   Jonathan.vcxproj -> C:\Users\40165151\Documents\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.pdb (Partial PDB)

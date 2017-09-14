@@ -7,7 +7,8 @@ Strafer::Strafer()
 	SetTexture("res/img/Strafer.png");
 	speed = 200.0f;
 	fireRate = 0.5f;
-	health = 20;
+	maxHealth = 20;
+	health = maxHealth;
 	active = false;
 	value = 100;
 	angularWeapon = Angular(2, 45, "res/img/Shot2.png", 300, 10, false, 2.0);

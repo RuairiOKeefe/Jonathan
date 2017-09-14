@@ -129,6 +129,10 @@ void MainMenu::Load(float xRes, float yRes)
 MainMenu::Selection MainMenu::GetMenuResponse(sf::RenderWindow & window)
 {
 	sf::Event event;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		window.close();
+	}
 	while (window.pollEvent(event))
 	{
 		if (event.type == sf::Event::MouseButtonPressed)

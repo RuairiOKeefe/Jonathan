@@ -22,13 +22,17 @@ public:
 	int wavesSpawned;
 	int deathCount;
 	int powerUpSpawn;
-	sf::Font scoreFont;
+	sf::Font font;
 	sf::Text scoreText;
+	sf::Text highscoreText;
+	sf::Text healthText;
 	int score;
+	int highscore;
 
 	float GetMagnitude(sf::Vector2f input);
 	void Load(float posX, float posY);
-	void Update(float maxX, float maxY, SFMLSoundProvider &soundProvider);
+	void Reset();
+	bool Update(float maxX, float maxY, SFMLSoundProvider &soundProvider);
 	void Render(sf::RenderWindow &window);
 private:
 

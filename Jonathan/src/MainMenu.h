@@ -32,6 +32,9 @@ public:
 	~MainMenu();
 
 	bool options = false;
+	int hoveredItem;
+	sf::Clock scrollClock;
+	float scrollTimer = 0.5;
 
 	void Load(float xRes, float yRes);
 	Selection GetMenuResponse(sf::RenderWindow &window);

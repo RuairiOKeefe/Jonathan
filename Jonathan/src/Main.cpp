@@ -105,11 +105,6 @@ int main()
 	}
 	while (window.isOpen())
 	{
-		if (Keyboard::isKeyPressed(Keyboard::Escape))
-		{
-			window.close();
-		}
-
 		window.clear(Color::Color(48, 40, 100, 255));
 
 		switch (state)
@@ -122,7 +117,7 @@ int main()
 			MenuHandler(window);
 			break;
 		case Game:
-			Event event; //I hate everything this stands for.
+			Event event;
 			while (window.pollEvent(event))
 			{
 				if (event.type == Event::Closed)
@@ -130,7 +125,11 @@ int main()
 					window.close();
 				}
 			}
-			game.Update((float)resolution.x, (float)resolution.y, soundProvider);
+			if (!game.Update((float)resolution.x, (float)resolution.y, soundProvider))
+			{
+				game.Reset();
+				state = Menu;
+			}
 			game.Render(window);
 			break;
 		case Pause:

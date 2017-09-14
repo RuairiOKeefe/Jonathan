@@ -16,25 +16,45 @@ void Game::Load(float posX, float posY)
 	bgSprite.setTexture(bgTexture);
 	player.SetPosition(sf::Vector2f(posX, posY));
 
-	for (int i = -1; i < 1; i++)
-	{
-		Charger* charger = new Charger(sf::Vector2f(posX + (i * 64), -64));
-		hostileVec.push_back(charger);
-	}
+	spawnClock.restart();
+	powerUpSpawn = 5 * (wavesSpawned + 1);//Enemies till next spawn
 
-	powerUpSpawn = 20;//Enemies till next spawn
-
-	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
+	if (!font.loadFromFile("res/fonts/ebrimabd.ttf"))
 	{
 		throw std::invalid_argument("Error Loading Font");
 	}
-	scoreText.setFont(scoreFont);
+	highscoreText.setFont(font);
+	highscoreText.setString("Score: " + std::to_string(highscore));
+	highscoreText.setPosition(sf::Vector2f(10.0f, 10.0f));
+	scoreText.setFont(font);
 	scoreText.setString("Score: " + std::to_string(score));
-	scoreText.setPosition(sf::Vector2f(posX / 100, 0.0f));
+	scoreText.setPosition(sf::Vector2f(10.0f, 40.0f));
+	healthText.setFont(font);
+	healthText.setString("Health: " + std::to_string((int)player.health));
+	healthText.setPosition(sf::Vector2f(posX, 10.0f));
 }
 
-void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
+void Game::Reset()
 {
+	hostileVec.clear();
+	projectileVec.clear();
+	powerUpVec.clear();
+	player.health = player.maxHealth;
+	player.level = 0;
+	player.linearWeapon = Linear(1, 16, "res/img/Shot1.png", 1000, 5, true, 0.25);
+	player.angularWeapon = Angular(0, 90, "res/img/Shot1.png", 500, 5, true, 0.5);
+	wavesSpawned = 0;
+	if (score > highscore)
+		highscore = score;
+	score = 0;
+}
+
+bool Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
+	{
+		return false;
+	}
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
 	std::vector<Projectile>::iterator shot = projectileVec.begin();
@@ -87,6 +107,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 					PowerUp* powerUp = new PowerUp(hostileVec[n]->sprite.getPosition());
 					powerUpVec.push_back(powerUp);
 					deathCount = 0;
+					powerUpSpawn = 5 * (wavesSpawned + 1);
 				}
 			}
 			score += hostileVec[n]->value;
@@ -138,7 +159,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 		{
 			for (int i = -2 * wavesSpawned; i < 2 * wavesSpawned; i++)
 			{
-				Charger* charger = new Charger(sf::Vector2f((maxX/2) + (i * 64), -64));
+				Charger* charger = new Charger(sf::Vector2f((maxX / 2) + (i * 64), -64));
 				hostileVec.push_back(charger);
 			}
 		}
@@ -155,7 +176,14 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 		wavesSpawned++;
 	}
 
+	highscoreText.setString("Highscore: " + std::to_string(highscore));
 	scoreText.setString("Score: " + std::to_string(score));
+	healthText.setString("Health: " + std::to_string((int)player.health));
+
+	if (player.health <= 0)
+		return false;
+
+	return true;
 }
 
 void Game::Render(sf::RenderWindow &window)
@@ -180,5 +208,7 @@ void Game::Render(sf::RenderWindow &window)
 		window.draw((*ships)->sprite);
 		ships++;
 	}
+	window.draw(highscoreText);
 	window.draw(scoreText);
+	window.draw(healthText);
 }
