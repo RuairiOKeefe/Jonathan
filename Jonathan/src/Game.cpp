@@ -9,27 +9,20 @@ float Game::GetMagnitude(sf::Vector2f input)
 
 void Game::Load(float posX, float posY)
 {
-	//float xScale = 2;
+	if (!bgTexture.loadFromFile("res/img/Space.png"))
+	{
+		throw std::invalid_argument("Error Loading Texture");
+	}
+	bgSprite.setTexture(bgTexture);
 	player.SetPosition(sf::Vector2f(posX, posY));
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 - (i * 8)), sf::Vector2f(1, 0.2f));
-	//	hostileVec.push_back(strafer);
-	//}
 
-	for (int i = -5; i < 5; i++)
+	for (int i = -1; i < 1; i++)
 	{
 		Charger* charger = new Charger(sf::Vector2f(posX + (i * 64), -64));
 		hostileVec.push_back(charger);
 	}
 
-	//for (int i = -5; i < 5; i++)
-	//{
-	//	PowerUp* powerUp = new PowerUp(sf::Vector2f(posX + (i * 64), 128));
-	//	powerUpVec.push_back(powerUp);
-	//}
-
-	powerUpSpawn = 5;//Enemies till next spawn
+	powerUpSpawn = 20;//Enemies till next spawn
 
 	if (!scoreFont.loadFromFile("res/fonts/ebrimabd.ttf"))
 	{
@@ -42,11 +35,9 @@ void Game::Load(float posX, float posY)
 
 void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
-	//soundProvider.PlaySound("res/Audio/Buchew.ogg");
 	static sf::Clock clock;
 	float dt = clock.restart().asSeconds();
-	//player.sprite.rotate(dt*10.0f);
-	std::vector<Projectile>::iterator shot = projectileVec.begin();//may need at least one hostile to have shots register
+	std::vector<Projectile>::iterator shot = projectileVec.begin();
 	while (shot != projectileVec.end())
 	{
 		shot->Update(dt, maxX, maxY);
@@ -137,7 +128,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 
 	if (spawnClock.getElapsedTime().asSeconds() >= 10.0f)
 	{
-		for (int i = 0; i < 10 * wavesSpawned; i++)
+		for (int i = 0; i < 2 * (wavesSpawned + 1); i++)
 		{
 			Strafer* strafer = new Strafer(sf::Vector2f(0.0f - (i * 40), 100 - (i * 8)), sf::Vector2f(1, 0.2f));
 			hostileVec.push_back(strafer);
@@ -145,7 +136,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 
 		if (wavesSpawned > 0)
 		{
-			for (int i = -5 * wavesSpawned; i < 5 * wavesSpawned; i++)
+			for (int i = -2 * wavesSpawned; i < 2 * wavesSpawned; i++)
 			{
 				Charger* charger = new Charger(sf::Vector2f((maxX/2) + (i * 64), -64));
 				hostileVec.push_back(charger);
@@ -153,7 +144,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 		}
 		if (wavesSpawned > 1)
 		{
-			for (int i = 0; i < 10 * wavesSpawned; i++)
+			for (int i = 0; i < 2 * (wavesSpawned + 1); i++)
 			{
 				Strafer* strafer = new Strafer(sf::Vector2f(maxX + (i * 40), 100 - (i * 8)), sf::Vector2f(-1, 0.2f));
 				hostileVec.push_back(strafer);
@@ -169,6 +160,7 @@ void Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 
 void Game::Render(sf::RenderWindow &window)
 {
+	window.draw(bgSprite);
 	std::vector<Projectile>::iterator shot = projectileVec.begin();
 	while (shot != projectileVec.end())
 	{

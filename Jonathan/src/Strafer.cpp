@@ -7,10 +7,10 @@ Strafer::Strafer()
 	SetTexture("res/img/Strafer.png");
 	speed = 200.0f;
 	fireRate = 0.5f;
-	health = 5;
+	health = 20;
 	active = false;
 	value = 100;
-	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 10, false, 2.0);
+	angularWeapon = Angular(2, 45, "res/img/Shot2.png", 300, 10, false, 2.0);
 }
 
 Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
@@ -20,10 +20,10 @@ Strafer::Strafer(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
 	direction = sqrtf((moveDirection.x * moveDirection.x) + (moveDirection.y * moveDirection.y)) * moveDirection;
 	speed = 200.0f;
 	fireRate = 0.5f;
-	health = 5;
+	health = 20;
 	active = false;
 	value = 100;
-	angularWeapon = Angular(2, 45, "res/img/BasicShot.png", 300, 10, false, 2.0);
+	angularWeapon = Angular(3, 45, "res/img/Shot2.png", 300, 10, false, 4.0);
 }
 
 Strafer::~Strafer()

@@ -6,8 +6,8 @@ SoundFileCache::SoundFileCache(void) {}
 
 SoundFileCache::~SoundFileCache(void)
 {
-	std::for_each(_sounds.begin(), _sounds.end(), Deallocator<sf::SoundBuffer*>());
-	std::for_each(_music.begin(), _music.end(), Deallocator<sf::Music*>());
+	//std::for_each(_sounds.begin(), _sounds.end(), Deallocator<sf::SoundBuffer*>());
+	//std::for_each(_music.begin(), _music.end(), Deallocator<sf::Music*>());
 }
 
 

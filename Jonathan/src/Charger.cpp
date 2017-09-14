@@ -7,10 +7,10 @@ Charger::Charger()
 	SetTexture("res/img/Charger.png");
 	speed = 200.0f;
 	fireRate = 0.5f;
-	health = 5;
+	health = 10;
 	active = false;
 	value = 50;
-	linearWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 1.0);
+	linearWeapon = Linear(1, 1, "res/img/Shot1.png", 300, 5, false, 1.0);
 }
 
 Charger::Charger(sf::Vector2f spawnPosition)
@@ -19,10 +19,10 @@ Charger::Charger(sf::Vector2f spawnPosition)
 	sprite.setPosition(spawnPosition);
 	speed = 200.0f;
 	fireRate = 0.5f;
-	health = 5;
+	health = 10;
 	active = false;
 	value = 50;
-	linearWeapon = Linear(1, 1, "res/img/BasicShot.png", 300, 5, false, 1.0);
+	linearWeapon = Linear(1, 1, "res/img/Shot1.png", 300, 5, false, 2.0);
 }
 
 Charger::~Charger()
