@@ -40,11 +40,8 @@ void Strafer::Update(float dt, std::vector<Projectile>& projectileList, sf::Vect
 		sprite.rotate(turnAngle);
 	if (active)
 	{
-		if (active)
-		{
-			linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
-			angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
-		}
+		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
+		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
 	}
 	Move(speed * direction * dt);
 	if (active)

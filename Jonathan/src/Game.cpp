@@ -13,7 +13,10 @@ void Game::Load(float posX, float posY)
 	{
 		throw std::invalid_argument("Error Loading Texture");
 	}
-	bgSprite.setTexture(bgTexture);
+	bgSprite1.setTexture(bgTexture);
+	bgSprite2.setTexture(bgTexture);
+	bgSprite1.setPosition(sf::Vector2f(0, posY));
+	bgSprite2.setPosition(sf::Vector2f(0, -posY));
 	player.SetPosition(sf::Vector2f(posX, posY));
 
 	spawnClock.restart();
@@ -23,6 +26,7 @@ void Game::Load(float posX, float posY)
 	{
 		throw std::invalid_argument("Error Loading Font");
 	}
+
 	highscoreText.setFont(font);
 	highscoreText.setString("Highscore: ");
 	highscoreText.setPosition(sf::Vector2f(10.0f, 10.0f));
@@ -173,10 +177,26 @@ bool Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 			}
 		}
 
+		if (wavesSpawned > 4)
+		{
+			for (int i = 0; i < (wavesSpawned - 4); i++)
+			{
+				float ranX = 16 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (maxX-32)));
+				Pulser* pulser = new Pulser(sf::Vector2f((ranX), -64), sf::Vector2f(0, 1));
+				hostileVec.push_back(pulser);
+			}
+		}
+
 		spawnClock.restart();
 		wavesSpawned++;
 	}
 
+	bgSprite1.move(sf::Vector2f(0, 1)*200.f*dt);
+	bgSprite2.move(sf::Vector2f(0, 1)*200.f*dt);
+	if (bgSprite1.getPosition().y >= maxY)
+		bgSprite1.move(sf::Vector2f(0, -maxY * 2));
+	if (bgSprite2.getPosition().y >= maxY)
+		bgSprite2.move(sf::Vector2f(0, -maxY * 2));
 	highscoreText.setString("Highscore: " + std::to_string(highscore));
 	scoreText.setString("Score: " + std::to_string(score));
 	healthText.setString("Health: " + std::to_string((int)player.health));
@@ -189,7 +209,8 @@ bool Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 
 void Game::Render(sf::RenderWindow &window)
 {
-	window.draw(bgSprite);
+	window.draw(bgSprite1);
+	window.draw(bgSprite2);
 	std::vector<Projectile>::iterator shot = projectileVec.begin();
 	while (shot != projectileVec.end())
 	{

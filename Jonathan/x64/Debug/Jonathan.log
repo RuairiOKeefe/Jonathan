@@ -1,14 +1,11 @@
 ﻿  Game.cpp
-e:\programming\github\jonathan\jonathan\src\game.cpp(155): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\programming\github\jonathan\jonathan\src\game.cpp(171): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\programming\github\jonathan\jonathan\src\game.cpp(159): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\programming\github\jonathan\jonathan\src\game.cpp(175): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Skipping... (no relevant changes detected)
-  Weapon.cpp
   ServiceLocator.cpp
   SFMLSoundProvider.cpp
   Projectile.cpp
-  PowerUp.cpp
   Linear.cpp
-  GameObject.cpp
   EnemyShip.cpp
   Angular.cpp
   Jonathan.vcxproj -> E:\Programming\GitHub\Jonathan\Jonathan\x64\Debug\Jonathan.exe

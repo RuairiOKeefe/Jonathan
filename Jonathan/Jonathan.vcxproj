@@ -167,6 +167,7 @@
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PowerUp.h" />
     <ClInclude Include="src\Projectile.h" />
+    <ClInclude Include="src\Pulser.h" />
     <ClInclude Include="src\ServiceLocator.h" />
     <ClInclude Include="src\SFMLSoundProvider.h" />
     <ClInclude Include="src\Ship.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Projectile.cpp" />
+    <ClCompile Include="src\Pulser.cpp" />
     <ClCompile Include="src\ServiceLocator.cpp" />
     <ClCompile Include="src\SFMLSoundProvider.cpp" />
     <ClCompile Include="src\Ship.cpp" />

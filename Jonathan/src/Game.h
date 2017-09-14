@@ -8,6 +8,7 @@
 #include "PowerUp.h"
 #include "Strafer.h"
 #include "Charger.h"
+#include "Pulser.h"
 
 class Game
 {
@@ -17,7 +18,8 @@ public:
 	std::vector<Projectile> projectileVec;
 	std::vector<PowerUp*> powerUpVec;
 	sf::Texture bgTexture;
-	sf::Sprite bgSprite;
+	sf::Sprite bgSprite1;
+	sf::Sprite bgSprite2;
 	sf::Clock spawnClock;
 	int wavesSpawned;
 	int deathCount;

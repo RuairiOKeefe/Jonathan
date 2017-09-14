@@ -105,7 +105,7 @@ int main()
 	}
 	while (window.isOpen())
 	{
-		window.clear(Color::Color(48, 40, 100, 255));
+		window.clear(Color::Color::Black);
 
 		switch (state)
 		{

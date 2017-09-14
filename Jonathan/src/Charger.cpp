@@ -11,7 +11,7 @@ Charger::Charger()
 	health = maxHealth;
 	active = false;
 	value = 50;
-	linearWeapon = Linear(1, 1, "../res/img/Shot1.png", 300, 5, false, 1.0);
+	linearWeapon = Linear(1, 1, "../res/img/Shot1.png", 300, 5, false, 2.0);
 }
 
 Charger::Charger(sf::Vector2f spawnPosition)
@@ -33,11 +33,36 @@ Charger::~Charger()
 void Charger::Update(float dt, std::vector<Projectile>& projectileList, sf::Vector2f target, float maxX, float maxY, SFMLSoundProvider &soundProvider)
 {
 	sf::Vector2f targetVec = target - sprite.getPosition();
-	targetVec = targetVec / sqrtf((targetVec.x * targetVec.x) + (targetVec.y * targetVec.y));
+	float distance = sqrtf((targetVec.x * targetVec.x) + (targetVec.y * targetVec.y));
+	targetVec = targetVec / distance;
 	float targetAngle = (atan2(targetVec.x, -targetVec.y) * 180 / M_PI);
 	sprite.rotate(targetAngle - sprite.getRotation());
 	if (active)
 	{
+		if (distance < 150)
+		{
+			close = true;
+			speed = 100.0f;
+			if (distance < 50)
+			{
+				speed = -20.0f;
+			}
+		}
+		else
+		{
+			close = false;
+			speed = 200.0f;
+		}
+		if (close && !inMelee)
+		{
+			angularWeapon = Angular(12, 360, "../res/img/Shot2.png", 300, 10, false, 2.0);
+			inMelee = true;
+		}
+		if (!close && inMelee)
+		{
+			angularWeapon = Angular(0, 360, "../res/img/Shot2.png", 300, 10, false, 2.0);
+			inMelee = false;
+		}
 		linearWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
 		angularWeapon.Update(dt, this->sprite.getRotation(), sprite.getPosition(), projectileList, soundProvider);
 	}
