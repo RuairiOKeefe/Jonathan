@@ -8,7 +8,7 @@ Pulser::Pulser()
 	speed = 200.0f;
 	direction = sf::Vector2f(0, 1);
 	fireRate = 0.5f;
-	maxHealth = 100;
+	maxHealth = 20;
 	health = maxHealth;
 	active = false;
 	value = 100;
@@ -24,7 +24,7 @@ Pulser::Pulser(sf::Vector2f spawnPosition, sf::Vector2f moveDirection)
 	stayTime = 3.0f;
 	speed = 100.0f;
 	fireRate = 0.5f;
-	health = 100;
+	health = 20;
 	active = false;
 	value = 200;
 	angularWeapon = Angular(8, 360, "../res/img/Shot3.png", 300, 15, false, 3.0);

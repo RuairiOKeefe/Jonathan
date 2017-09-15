@@ -71,11 +71,10 @@ bool Game::Update(float maxX, float maxY, SFMLSoundProvider &soundProvider)
 		{
 			if ((*ships)->active && (shot->playerShot && (GetMagnitude(shot->sprite.getPosition() - (*ships)->sprite.getPosition()) <= (shot->radius + (*ships)->radius))))
 				(*ships)->TakeDamage(shot->CheckHit((*ships)->sprite));
-			else
-				if (!shot->playerShot && GetMagnitude(shot->sprite.getPosition() - player.sprite.getPosition()) <= (shot->radius + player.radius))
-					player.TakeDamage(shot->CheckHit(player.sprite));
 			ships++;
 		}
+		if (!shot->playerShot && GetMagnitude(shot->sprite.getPosition() - player.sprite.getPosition()) <= (shot->radius + player.radius))
+			player.TakeDamage(shot->CheckHit(player.sprite));
 
 		shot++;
 	}
